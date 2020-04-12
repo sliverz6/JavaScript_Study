@@ -1,4 +1,4 @@
-const addMovieModal = document.getElementById('add-modal');
+const addMovieModal = document.getElementById('add-modal'); // 가장 빠른 속도
 // const addMovieModal = document.querySelector('#add-modal');
 // const addMovieModal = document.body.children[1];
 const startAddMovieButton = document.querySelector('header button');
@@ -6,7 +6,7 @@ const startAddMovieButton = document.querySelector('header button');
 const backdrop = document.getElementById('backdrop');
 // const backdrop = document.body.firstElementChild;
 const cancelAddMovieButton = addMovieModal.querySelector('.btn--passive');
-const confrimAddMovieButton = cancelAddMovieButton.nextElementSibling;
+const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling;
 const userInputs = addMovieModal.querySelectorAll('input');
 // const userInputs = addMovieModal.getElementsByTagName('input');
 const entryTextSection = document.getElementById('entry-text');
@@ -39,7 +39,7 @@ const deleteMovieHandler = (movieId) => {
         }
         movieIndex++;
     }
-    movies.splice(movieIndex, 1);
+    movies.splice(movieIndex, 1); // movieIndex 위치에서 1개 지우기
     const listRoot = document.getElementById('movie-list');
     listRoot.children[movieIndex].remove();
     // listRoot.removeChild(listRoot.children[movieIndex]);
@@ -50,15 +50,15 @@ const deleteMovieHandler = (movieId) => {
 const startDeleteMovieHandler = (movieId) => {
     deleteMovieModal.classList.add('visible');
     toggleBackdrop();
-    const cancelDeletionButton = deleteMovieModal.querySelector('.btn--passive');
+
+    const cancelDeletionButton =  deleteMovieModal.querySelector('.btn--passive');
     let confirmDeletionButton = deleteMovieModal.querySelector('.btn--danger');
 
     confirmDeletionButton.replaceWith(confirmDeletionButton.cloneNode(true));
 
     confirmDeletionButton = deleteMovieModal.querySelector('.btn--danger');
-
-    // confirmDeletionButton.removeEventListener('click', deleteMovieHandler.bind(null, movieId)); // will not wrok
     
+    // confirmDeletionButton.removeEventListener('click', deleteMovieHandler);
     cancelDeletionButton.removeEventListener('click', closeMovieDeletionModal);
 
     cancelDeletionButton.addEventListener('click', closeMovieDeletionModal);
@@ -86,14 +86,14 @@ const closeMovieModal = () => {
     addMovieModal.classList.remove('visible');
 };
 
-const showMovieModal = () => { // or function() {}
+const showMovieModal = () => { // function() {}
     addMovieModal.classList.add('visible');
     toggleBackdrop();
-};
+};  
 
 const clearMovieInput = () => {
-    for (const usrInput of userInputs) {
-        usrInput.value = '';
+    for (const userInput of userInputs) {
+        userInput.value = '';
     }
 };
 
@@ -108,12 +108,13 @@ const addMovieHandler = () => {
     const imageUrlValue = userInputs[1].value;
     const ratingValue = userInputs[2].value;
 
+    // 유효성 검사
     if (
-        titleValue.trim() === '' || 
+        titleValue.trim() === '' || // trim()은 앞의 공백 제거
         imageUrlValue.trim() === '' || 
         ratingValue.trim() === '' ||
         +ratingValue < 1 || 
-        +ratingValue > 5
+        +ratingValue > 5 // 앞의 +는 숫자로 변환시켜줌
     ) {
         alert('Please enter valid values (rating between 1 and 5).');
         return;
@@ -144,4 +145,4 @@ const backdropClickHandler = () => {
 startAddMovieButton.addEventListener('click', showMovieModal);
 backdrop.addEventListener('click', backdropClickHandler);
 cancelAddMovieButton.addEventListener('click', cancelAddMovieHandler);
-confrimAddMovieButton.addEventListener('click', addMovieHandler);
+confirmAddMovieButton.addEventListener('click', addMovieHandler);
