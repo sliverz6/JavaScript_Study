@@ -25,6 +25,10 @@ function getMaxLifeValues() {
     return parsedValue;
 }
 
+try {
+    
+}
+
 let chosenMaxLife = getMaxLifeValues();
 
 let currentMonsterHealth = chosenMaxLife;
