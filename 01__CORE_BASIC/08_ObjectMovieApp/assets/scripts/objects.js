@@ -5,19 +5,20 @@ const movies = [];
 
 const renderMovies = (filter = '') => {
     const movieList = document.getElementById('movie-list');
-    
+
     if (movies.length === 0) {
         movieList.classList.remove('visible');
+        return;
     } else {
         movieList.classList.add('visible');
     }
-    movieList.innerHTML = '';
+    movieList.innerHTML = '';     
 
     const filteredMovies = !filter 
         ? movies 
         : movies.filter(movie => movie.info.title.includes(filter));
 
-    filteredMovies.forEach((movie) => {
+    filteredMovies.forEach(movie => {
         const movieEl = document.createElement('li');
         let text = movie.info.title + ' - ';
         for (const key in movie.info) {
@@ -38,7 +39,7 @@ const addMovieHandler = () => {
     if (
         title.trim() === '' ||
         extraName.trim() === '' ||
-        extraValue.trim() === ''    
+        extraValue.trim() === ''
     ) {
         return;
     }
