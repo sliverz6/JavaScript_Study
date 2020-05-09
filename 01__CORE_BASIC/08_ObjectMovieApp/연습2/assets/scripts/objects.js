@@ -3,6 +3,12 @@ const searchBtn = document.getElementById('search-btn');
 
 const movies = [];
 
+const renderMovies = () => {
+    const movieList = document.getElementById('movie-list');
+
+    movieList.innerHTML = '';
+};
+
 const addMovieHandler = () => {
     const title = document.getElementById('title').value;
     const extraName = document.getElementById('extra-name').value;
